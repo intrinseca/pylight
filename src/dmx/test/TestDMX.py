@@ -1,6 +1,6 @@
 import unittest
 
-from dmx.universe import Universe
+from dmx import Universe
 
 class TestDMX(unittest.TestCase):
     
