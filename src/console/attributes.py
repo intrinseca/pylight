@@ -1,6 +1,9 @@
 class IntensityAttribute:
     def __init__(self):
         self.value = 0
+    
+    def percentage(self):
+        return self.value / 255.0;
 
 class PositionAttribute:
     def __init__(self):
@@ -9,6 +12,6 @@ class PositionAttribute:
 
 class RGBColorAttribute:    
     def __init__(self, r, g, b):  
-        self.r = 0
-        self.g = 0
-        self.b = 0
+        self.r = r
+        self.g = g
+        self.b = b

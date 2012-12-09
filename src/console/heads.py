@@ -25,4 +25,11 @@ class FourChannelLED(Head):
     
     def getDMX(self):
         return [self.intensity.value, self.color.r, self.color.g, self.color.b]
+
+class ThreeChannelLED(Head):
+    def __init__(self, universe, startChannel):
+        Head.__init__(self, universe, startChannel, 3)
+        self.color = RGBColorAttribute(0, 0, 0)
     
+    def getDMX(self):
+        return [int(x * self.intensity.percentage()) for x in [self.color.r, self.color.g, self.color.b]]
