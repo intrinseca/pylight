@@ -22,12 +22,12 @@ class Show:
         self.programming_mode = False #Programming Mode: Don't update the outputs
         self.states = []
     
-    def recordNewState(self):
+    def saveState(self):
         s = State()
         s.save(self.rig.heads)
-        self.states.append(object)
+        self.states.append(s)
     
-    def loadSavedState(self, state):
+    def restoreState(self, state):
         state.restore(self.rig.heads)
     
     def refresh(self):

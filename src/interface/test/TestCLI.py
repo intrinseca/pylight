@@ -23,6 +23,7 @@ class TestCLI(unittest.TestCase):
         
     def testSingleChannel(self):
         self.parser.parseLine("1@128")
+        self.show.refresh()
         
         self.assertEqual(self.rig.outputs[0].channels[0], 128)
         
@@ -30,7 +31,9 @@ class TestCLI(unittest.TestCase):
             self.assertEqual(self.rig.outputs[0].channels[i], 0, "Channel %s set incorrectly" % (i + 1))
 
     def testMultipleChannels(self):
-        self.parser.parseLine("1-10@176")
+        self.parser.parseLine("1-10@176")        
+        self.show.refresh()
+        
         for i in range(0,10):
             self.assertEqual(self.rig.outputs[0].channels[i], 176, "Channel %s not set correctly" % (i + 1))
         

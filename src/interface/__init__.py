@@ -13,7 +13,11 @@ class Terminal:
             stdout.write("pyl> ")
             line = stdin.readline()
             
-            self.parser.parseLine(line)
+            response = self.parser.parseLine(line)
+        
+            if response:
+                print "   ! " + response
             
-            print self.rig.outputs[0]
+            self.show.refresh()            
+            print self.show.rig.outputs[0]
             
