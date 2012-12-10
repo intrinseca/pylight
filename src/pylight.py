@@ -1,9 +1,10 @@
-from console import Rig
+from console import Rig, Show
 from console.heads import Dimmer, FourChannelLED, ThreeChannelLED
 import console.colors.rgb as colors
 from interface import Terminal
 
 r = Rig()
+show = Show(r)
 
 for i in range(1, 25):
     d = Dimmer(1, i)
@@ -19,5 +20,5 @@ for i in range(1, 25):
 #l2.intensity.value = 99
 #l2.color = colors.Orange()
 
-interface = Terminal(r)
+interface = Terminal(show)
 interface.start()

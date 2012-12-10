@@ -6,20 +6,16 @@ Created on 2 Dec 2012
 
 import unittest
 
-from console import Rig
-from console.heads import Dimmer
+from console import Show
 from interface.parsers import CLI
+from test import createSampleRig
 
 class TestCLI(unittest.TestCase):
     def setUp(self):
-        self.rig = Rig()
-
-        for i in range(1, 25):
-            d = Dimmer(1, i)
-            self.rig.heads[i] = d
-            d.attributes["MasterIntensity"].value = 0
+        self.rig = createSampleRig()
+        self.show = Show(self.rig)
         
-        self.parser = CLI(self.rig)
+        self.parser = CLI(self.show)
         
     def tearDown(self):
         self.interface = None

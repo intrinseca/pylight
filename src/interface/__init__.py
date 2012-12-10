@@ -2,12 +2,12 @@ from sys import stdin, stdout
 from interface import parsers
 
 class Terminal:
-    def __init__(self, rig):
-        self.rig = rig
+    def __init__(self, show):
+        self.show = show
         
     
     def start(self):
-        self.parser = parsers.CLI(self.rig)
+        self.parser = parsers.CLI(self.show)
         
         while True:
             stdout.write("pyl> ")
@@ -15,6 +15,5 @@ class Terminal:
             
             self.parser.parseLine(line)
             
-            self.rig.refresh()
             print self.rig.outputs[0]
             
