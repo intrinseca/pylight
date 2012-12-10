@@ -1,14 +1,14 @@
 from dmx import Universe
 
 class Rig:
-    heads = []
+    heads = {}
     outputs = []
     
     def __init__(self):
         self.outputs = [Universe()]
     
     def refresh(self):
-        for head in self.heads:
+        for head_number, head in self.heads.iteritems():
             uni = self.outputs[head.address.universe - 1]
             i = 0
             
