@@ -8,7 +8,7 @@ r = Rig()
 for i in range(1, 25):
     d = Dimmer(1, i)
     r.heads[i] = d
-    d.intensity.value = i * 10
+    d.attributes["MasterIntensity"].value = i * 10
 
 #l1 = FourChannelLED(1, 33)
 #l2 = ThreeChannelLED(1, 49)

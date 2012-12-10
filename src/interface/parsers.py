@@ -18,6 +18,6 @@ class CLI(object):
                 endHead = int(m.group(3))
                 
             for i in range(startHead, endHead + 1):
-                self.rig.heads[i].intensity.value = value
+                self.rig.heads[i].attributes["MasterIntensity"].value = value
         
         self.rig.refresh()

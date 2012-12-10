@@ -4,12 +4,17 @@ from dmx import Address
 class Head:    
     def __init__(self, universe, startChannel, channels):
         self.address = Address(universe, startChannel)
-        self.intensity = IntensityAttribute()
         self.channels = channels
         assert(self.address.channel + (self.channels - 1) <= 256)
+        
+        self.attributes = {}
+        self.attributes["MasterIntensity"] = IntensityAttribute()
+    
+    def intensity(self):
+        return self.attributes["MasterIntensity"].value
     
     def getDMX(self):
-        return [self.intensity.value]
+        return [self.intensity()]
     
 class Dimmer(Head):
     def __init__(self, universe, startChannel):
@@ -21,15 +26,15 @@ class Dimmer(Head):
 class FourChannelLED(Head):
     def __init__(self, universe, startChannel):
         Head.__init__(self, universe, startChannel, 4)
-        self.color = RGBColorAttribute(0, 0, 0)
+        self.attributes["Color"] = RGBColorAttribute(0, 0, 0)
     
     def getDMX(self):
-        return [self.intensity.value, self.color.r, self.color.g, self.color.b]
+        return [self.intensity(), self.color.r, self.color.g, self.color.b]
 
 class ThreeChannelLED(Head):
     def __init__(self, universe, startChannel):
         Head.__init__(self, universe, startChannel, 3)
-        self.color = RGBColorAttribute(0, 0, 0)
+        self.attributes["Color"] = RGBColorAttribute(0, 0, 0)
     
     def getDMX(self):
-        return [int(x * self.intensity.percentage()) for x in [self.color.r, self.color.g, self.color.b]]
+        return [int(x * self.intensity()) for x in [self.color.r, self.color.g, self.color.b]]

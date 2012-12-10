@@ -17,7 +17,7 @@ class TestCLI(unittest.TestCase):
         for i in range(1, 25):
             d = Dimmer(1, i)
             self.rig.heads[i] = d
-            d.intensity.value = 0
+            d.attributes["MasterIntensity"].value = 0
         
         self.parser = CLI(self.rig)
         
