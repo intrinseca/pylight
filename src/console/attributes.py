@@ -4,6 +4,9 @@ class IntensityAttribute:
     
     def percentage(self):
         return self.value / 255.0;
+    
+    def __str__(self):
+        return "{:000}".format(self.value)
 
 class PositionAttribute:
     def __init__(self):

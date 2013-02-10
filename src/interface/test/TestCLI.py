@@ -40,3 +40,16 @@ class TestCLI(unittest.TestCase):
         for i in range(10, 256):
             self.assertEqual(self.rig.outputs[0].channels[i], 0, "Channel %s set incorrectly" % (i + 1))
     
+    def testState(self):
+        for i in range(1, 25):
+            self.parser.parseLine("{0}@{1:00}".format(i, i * 10))
+        
+        self.parser.parseLine("save")
+        self.parser.parseLine("1-24@00")
+        self.show.refresh()
+        self.parser.parseLine("restore 1")
+        self.show.refresh()
+        
+        for i in range(1, 25):
+            self.assertEqual(self.rig.outputs[0].channels[i - 1], i * 10, "Channel %s not restored" % (i + 1))
+    

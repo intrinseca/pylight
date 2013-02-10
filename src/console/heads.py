@@ -21,7 +21,7 @@ class Dimmer(Head):
         Head.__init__(self, universe, startChannel, 1)
     
     def __str__(self):
-        return "I: %2d" % self.intensity.value
+        return "I: %2d" % self.attributes["MasterIntensity"].value
 
 class FourChannelLED(Head):
     def __init__(self, universe, startChannel):

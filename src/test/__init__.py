@@ -9,4 +9,6 @@ def createSampleRig():
         r.heads[i] = d
         d.attributes["MasterIntensity"].value = 0
     
+    r.refresh()
+    
     return r

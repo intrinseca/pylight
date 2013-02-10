@@ -21,6 +21,7 @@ class Show:
         self.theatre_mode = True #Theatre Mode: Record all heads for each state
         self.programming_mode = False #Programming Mode: Don't update the outputs
         self.states = []
+        self.sequences = []
     
     def saveState(self):
         s = State()
