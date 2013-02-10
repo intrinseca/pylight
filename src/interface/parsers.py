@@ -40,7 +40,7 @@ class CLI(object):
         f = fx.StaticIntensity()
         f.size = value / 100.0
         
-        self.show.programmer.addFX(range(startHead, endHead + 1), f)
+        self.show.programmer.add_fx(range(startHead, endHead + 1), f)
     
     def selectSequence(self, matches):
         if matches.group(2) == None:

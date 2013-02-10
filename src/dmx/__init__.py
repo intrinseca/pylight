@@ -1,6 +1,6 @@
 class Universe(object):
     def __init__(self):
-        self.channels = [0] * 256;
+        self.channels = [0] * 512;
     
     def __str__(self):
         ret = ""
@@ -19,7 +19,7 @@ class Address:
     
     def __init__(self, uni, chan):
         assert(uni > 0)
-        assert(chan >= 1 and chan <= 256)
+        assert(chan >= 1 and chan <= 512)
         
         self.universe = uni
         self.channel = chan

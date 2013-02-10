@@ -5,7 +5,7 @@ class Head:
     def __init__(self, universe, startChannel, channels):
         self.address = Address(universe, startChannel)
         self.channels = channels
-        assert(self.address.channel + (self.channels - 1) <= 256)
+        assert(self.address.channel + (self.channels - 1) <= 512)
         
         self.attributes = {}
         self.attributes["MasterIntensity"] = IntensityAttribute()

@@ -1,5 +1,7 @@
 from dmx import Universe
 from console.animation import State
+from threading import Thread
+import time
 
 class Rig:    
     def __init__(self):
@@ -43,4 +45,15 @@ class Show:
         if not self.programming_mode:
             self.programmer.apply(self.rig.heads)
             self.rig.refresh()
+    
+    def run(self):
+        self._refresh_thread = Thread(target = self._refresh_target)
+        self._refresh_thread.daemon = True
+        self._refresh_thread.start()
+    
+    def _refresh_target(self):
+        while True:
+            self.programmer.apply(self.rig.heads)
+            self.rig.refresh()
+            time.sleep(0.01)
     
