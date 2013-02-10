@@ -16,6 +16,10 @@ class Head:
     def getDMX(self):
         return [self.intensity()]
     
+    def reset(self):
+        for attr in self.attributes.itervalues():
+            attr.reset()
+    
 class Dimmer(Head):
     def __init__(self, universe, startChannel):
         Head.__init__(self, universe, startChannel, 1)

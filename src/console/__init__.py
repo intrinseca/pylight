@@ -6,8 +6,12 @@ class Rig:
         self.heads = {}
         self.outputs = [Universe()]
     
+    def reset(self):
+        for head in self.heads.itervalues():
+            head.reset()
+    
     def refresh(self):
-        for headNumber, head in self.heads.iteritems():
+        for head in self.heads.itervalues():
             uni = self.outputs[head.address.universe - 1]
             i = 0
             
@@ -18,20 +22,25 @@ class Rig:
 class Show:
     def __init__(self, rig):
         self.rig = rig
-        self.theatre_mode = True #Theatre Mode: Record all heads for each state
-        self.programming_mode = False #Programming Mode: Don't update the outputs
         self.states = []
         self.sequences = []
+        self.programmer = State()
+        
+        self.programming_mode = False #Programming Mode: Don't update the outputs
     
     def saveState(self):
-        s = State()
-        s.save(self.rig.heads)
-        self.states.append(s)
+        self.states.append(self.programmer)
+        self.clearProgrammer()
     
     def restoreState(self, state):
-        state.restore(self.rig.heads)
+        self.programmer = state
+    
+    def clearProgrammer(self):        
+        self.programmer = State()
+        self.rig.reset()
     
     def refresh(self):
         if not self.programming_mode:
+            self.programmer.apply(self.rig.heads)
             self.rig.refresh()
     

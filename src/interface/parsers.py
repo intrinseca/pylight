@@ -1,4 +1,5 @@
 import re
+from console import fx
 
 class CLI(object):    
     def __init__(self, show):
@@ -7,6 +8,7 @@ class CLI(object):
         self.commands = [(re.compile("^([\d]{1,3})(-([\d]{1,3}))?@([\d]{2,3})"), self.setIntensity),
                          (re.compile("save"), self.save),
                          (re.compile("restore (\d+)"), self.restore),
+                         (re.compile("clear"), self.clear),
                          (re.compile("seq( (\d+))?\r\n"), self.selectSequence),
                          (re.compile("seqadd (\d+)"), self.addStateToSequence)]
         
@@ -22,6 +24,10 @@ class CLI(object):
         return "State {} restored".format(index)
         pass
     
+    def clear(self, matches):
+        self.show.clearProgrammer()
+        return "Programmer Cleared"
+    
     def setIntensity(self, matches):
         startHead = int(matches.group(1))
         value = int(matches.group(4))
@@ -31,8 +37,10 @@ class CLI(object):
         else:
             endHead = int(matches.group(3))
         
-        for i in range(startHead, endHead + 1):
-            self.show.rig.heads[i].attributes["MasterIntensity"].value = value
+        f = fx.StaticIntensity()
+        f.size = value / 100.0
+        
+        self.show.programmer.addFX(range(startHead, endHead + 1), f)
     
     def selectSequence(self, matches):
         if matches.group(2) == None:

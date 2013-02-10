@@ -18,6 +18,6 @@ class Terminal:
             if response:
                 print "   ! " + response
             
-            self.show.refresh()            
+            self.show.refresh()
             print self.show.rig.outputs[0]
             
